@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CustomButton } from "../components";
+import { connect } from "../utils/api";
 
 function Navbar() {
-    const address = "";
+    const [address, setAddress] = useState("");
+
+    const connectMetamask = () => {
+        connect();
+        setAddress("abc");
+    };
+
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -61,7 +68,7 @@ function Navbar() {
                         styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
                         handleClick={() => {
                             if (address) navigate("create-campaign");
-                            else connect();
+                            else connectMetamask();
                         }}
                     />
                 </div>
