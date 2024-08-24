@@ -1,13 +1,12 @@
-import { useState } from "react";
+import React from "react";
+import { Navbar } from "./components";
+import { Outlet } from "react-router-dom";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
         <>
-            <div>
-                <h1 className="text-3xl text-red-600">Hello</h1>
-            </div>
+            <Navbar />
+            <Outlet />
         </>
     );
 }
