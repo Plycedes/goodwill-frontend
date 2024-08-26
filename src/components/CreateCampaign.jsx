@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { setCampaigns } from "../utils/api";
+import { setCampaign } from "../utils/api";
 import { CustomButton } from "../components";
 function CreateCampaign() {
     const [owner, setOwner] = useState("");
@@ -7,76 +7,93 @@ function CreateCampaign() {
     const [description, setDescription] = useState("");
     const [target, setTarget] = useState("");
     const [image, setImage] = useState("");
+
+    const createCampaign = async () => {
+        setCampaign(owner, title, description, target, image);
+    };
+
     return (
         <div>
             <div className="h-screen flex justify-center items-center mt-20 mb-20 ">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div class="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" for="name">
-                            Name of Student
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="owner"
+                        >
+                            Fundee
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="name"
+                            id="owner"
                             type="text"
-                            placeholder="Name of Student"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-                    <div class="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" for="rollno">
-                            Roll Number
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="rollno"
-                            type="text"
-                            placeholder="Roll Number"
-                            value={rollno}
-                            onChange={(e) => setRollno(e.target.value)}
+                            placeholder="Address of Fundee"
+                            value={owner}
+                            onChange={(e) => setOwner(e.target.value)}
                         />
                     </div>
                     <div class="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
-                            for="mobileno"
+                            htmlFor="title"
                         >
-                            Mobile Number
+                            Title
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="mobileno"
+                            id="title"
                             type="text"
-                            placeholder="Mobile Number"
-                            value={mobileno}
-                            onChange={(e) => setMobileno(e.target.value)}
+                            placeholder="Title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
                     <div class="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" for="math">
-                            Math
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="description"
+                        >
+                            Description
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="math"
+                            id="description"
                             type="text"
-                            placeholder="Math"
-                            value={math}
-                            onChange={(e) => setMath(e.target.value)}
+                            placeholder="Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
                     <div class="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" for="physics">
-                            Physics
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="target"
+                        >
+                            Target
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="physics"
+                            id="target"
                             type="text"
-                            placeholder="Physics"
-                            value={physics}
-                            onChange={(e) => setPhysics(e.target.value)}
+                            placeholder="Target Amount"
+                            value={target}
+                            onChange={(e) => setTarget(e.target.value)}
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="image"
+                        >
+                            Cover Image
+                        </label>
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="image"
+                            type="text"
+                            placeholder="Image url"
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
                         />
                     </div>
 
@@ -86,7 +103,7 @@ function CreateCampaign() {
                             title={"Create"}
                             styles={""}
                             handleClick={() => {
-                                setCampaigns();
+                                createCampaign();
                             }}
                         />
                     </div>
