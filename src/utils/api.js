@@ -22,9 +22,10 @@ export const getCampaigns = async () => {
         signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         console.log("Mining");
-        const tx = await contract.getCampaigns();
-        console.log(tx[1].title);
-        console.log(tx.length);
+        const campaigns = await contract.getCampaigns();
+        console.log(campaigns[1].title);
+        console.log(campaigns.length);
+        return campaigns;
     } catch (error) {
         console.log(error);
     }

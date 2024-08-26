@@ -16,7 +16,7 @@ function CreateCampaign() {
         <div>
             <div className="h-screen flex justify-center items-center mt-20 mb-20 ">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                             htmlFor="owner"
@@ -32,7 +32,7 @@ function CreateCampaign() {
                             onChange={(e) => setOwner(e.target.value)}
                         />
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                             htmlFor="title"
@@ -48,7 +48,7 @@ function CreateCampaign() {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                             htmlFor="description"
@@ -64,7 +64,7 @@ function CreateCampaign() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                             htmlFor="target"
@@ -80,7 +80,7 @@ function CreateCampaign() {
                             onChange={(e) => setTarget(e.target.value)}
                         />
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
                             htmlFor="image"
