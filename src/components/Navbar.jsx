@@ -17,7 +17,7 @@ function Navbar() {
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <Link to="/" className="flex items-center">
                         <img
-                            src="https://res.cloudinary.com/dxsffcg6l/image/upload/v1722529709/logo_ngqou5.png"
+                            src="https://seeklogo.com/images/O/orange-logo-256D2F22D8-seeklogo.com.png"
                             className="mr-3 h-12"
                             alt="Logo"
                         />

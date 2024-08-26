@@ -8,13 +8,14 @@ import {
     RouterProvider,
     Route,
 } from "react-router-dom";
-import { Dashboard, CreateCampaign } from "./components";
+import { Dashboard, CreateCampaign, CampaignInfo } from "./components";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route path="" element={<Dashboard />} />
             <Route path="create-campaign" element={<CreateCampaign />} />
+            <Route path="campaign-info/:id" element={<CampaignInfo />} />
         </Route>
     )
 );

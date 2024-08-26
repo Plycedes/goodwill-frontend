@@ -19,12 +19,7 @@ function Dashboard() {
                 <ul className="grid grid-cols-3">
                     {campaigns.map((campaign, i) => (
                         <li key={campaign.title} className="mr-10">
-                            <CampaignCard
-                                title={campaign.title}
-                                description={campaign.description}
-                                image={campaign.image}
-                                index={i}
-                            />
+                            <CampaignCard campaign={campaign} index={i} />
                         </li>
                     ))}
                 </ul>
