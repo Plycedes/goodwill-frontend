@@ -5,10 +5,12 @@ function CampaignCard({ campaign, index }) {
     const navigate = useNavigate();
 
     const data = {
+        owner: campaign.owner,
         title: campaign.title,
         description: campaign.description,
-        target: campaign.title,
+        target: campaign.target,
         amountCollected: campaign.amountCollected,
+        image: campaign.image,
         index: index,
     };
 

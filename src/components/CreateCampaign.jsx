@@ -14,8 +14,8 @@ function CreateCampaign() {
 
     return (
         <div>
-            <div className="h-screen flex justify-center items-center mt-20 mb-20 ">
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div className="flex h-screen justify-center items-center">
+                <form className="grid grid-cols-2 gap-4 bg-white shadow-md rounded px-8 pt-6 pb-5">
                     <div className="mb-4">
                         <label
                             className="block text-gray-700 text-sm font-bold mb-2"
@@ -97,7 +97,7 @@ function CreateCampaign() {
                         />
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center">
                         <CustomButton
                             btnType="button"
                             title={"Create"}

@@ -45,3 +45,27 @@ export const setCampaign = async (owner, title, description, target, image) => {
         console.log(error);
     }
 };
+
+export const getDonators = async (index) => {
+    try {
+        provider = new ethers.BrowserProvider(window.ethereum);
+        signer = await provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+        console.log("Mining");
+        const res = await contract.getDonators(index);
+        const n = res[0].length;
+
+        const donations = [];
+
+        for (let i = 0; i < n; i++) {
+            donations.push({
+                donator: res[0][i],
+                donation: ethers.formatEther(res[1][i].toString()),
+            });
+        }
+
+        return donations;
+    } catch (error) {
+        console.log(error);
+    }
+};
