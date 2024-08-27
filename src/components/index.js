@@ -4,5 +4,6 @@ import Dashboard from "./Dashboard";
 import CampaignCard from "./CampaignCard";
 import CustomButton from "./CustomButton";
 import CampaignInfo from "./CampaignInfo";
+import Loader from "./Loader";
 
-export { CreateCampaign, Navbar, Dashboard, CustomButton, CampaignCard, CampaignInfo };
+export { CreateCampaign, Navbar, Dashboard, CustomButton, CampaignCard, CampaignInfo, Loader };

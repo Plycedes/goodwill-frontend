@@ -69,3 +69,17 @@ export const getDonators = async (index) => {
         console.log(error);
     }
 };
+
+export const donate = async (amount, index) => {
+    try {
+        provider = new ethers.BrowserProvider(window.ethereum);
+        signer = await provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+        console.log("Mining");
+        const res = await contract.donateToCampaign(index, { value: ethers.parseEther(amount) });
+        await res.wait();
+        console.log("Complete");
+    } catch (error) {
+        console.log(error);
+    }
+};

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getDonators } from "../utils/api.js";
+import { donate, getDonators } from "../utils/api.js";
 import { ethers } from "ethers";
+import { CustomButton, Loader } from "../components";
 
 function CampaignInfo() {
     const { state } = useLocation();
-    const [donations, setDonations] = useState([]);
     const navigate = useNavigate();
+
+    const [donations, setDonations] = useState([]);
+    const [donateForm, setDonateForm] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [amount, setAmount] = useState("");
 
     useEffect(() => {
         (async () => {
@@ -21,8 +26,60 @@ function CampaignInfo() {
         }
     }, [donations]);
 
+    const openDonateForm = () => {
+        setDonateForm((prev) => !prev);
+    };
+
+    const donateToCampaign = async () => {
+        setDonateForm(false);
+        setIsLoading(true);
+        await donate(amount, state.index);
+        setIsLoading(false);
+    };
+
     return (
         <div>
+            {donateForm && (
+                <div className="fixed inset-0 z-10 h-screen bg-[rgba(0,0,0,0.7)] flex items-center justify-center flex-col">
+                    <div className="">
+                        <form className="bg-white shadow-md rounded px-8 pt-6 pb-5">
+                            <div className="mb-4">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mb-2"
+                                    htmlFor="amount"
+                                >
+                                    Amount
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="amount"
+                                    type="text"
+                                    placeholder="Enter the amount to fund"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                />
+                            </div>
+                            <div className="flex items-center">
+                                <CustomButton
+                                    btnType="button"
+                                    title={"Donate Amount"}
+                                    styles={""}
+                                    handleClick={() => {
+                                        donateToCampaign();
+                                    }}
+                                />
+                                <button
+                                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none ml-2"
+                                    onClick={openDonateForm}
+                                >
+                                    Back
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+            {isLoading && <Loader />}
             <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-3xl m-5">
                 <div class="md:flex">
                     <div class="md:flex-shrink-0">
@@ -45,7 +102,10 @@ function CampaignInfo() {
                             <label>{ethers.formatEther(state.amountCollected.toString())}</label>
                         </div>
                         <div class="mt-4">
-                            <button class="bg-orange-700 text-white px-4 py-2 rounded hover:bg-orange-800 focus:outline-none">
+                            <button
+                                class="bg-orange-700 text-white px-4 py-2 rounded hover:bg-orange-800 focus:outline-none"
+                                onClick={openDonateForm}
+                            >
                                 Donate
                             </button>
                             <button
