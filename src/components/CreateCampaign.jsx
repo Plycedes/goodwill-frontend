@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import { setCampaign } from "../utils/api";
-import { CustomButton } from "../components";
+import { CustomButton, Loader } from "../components";
+import { useNavigate } from "react-router-dom";
+
 function CreateCampaign() {
     const [owner, setOwner] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [target, setTarget] = useState("");
     const [image, setImage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const createCampaign = async () => {
-        setCampaign(owner, title, description, target, image);
+        setIsLoading(true);
+        await setCampaign(owner, title, description, target, image);
+        setIsLoading(false);
+        navigate("/");
     };
 
     return (
         <div>
+            {isLoading && <Loader />}
             <div className="flex h-screen justify-center items-center">
                 <form className="grid grid-cols-2 gap-4 bg-white shadow-md rounded px-8 pt-6 pb-5">
                     <div className="mb-4">

@@ -18,7 +18,7 @@ function Dashboard() {
             <div className="mt-5 flex justify-center">
                 <ul className="grid grid-cols-3">
                     {campaigns.map((campaign, i) => (
-                        <li key={campaign.title} className="mr-10">
+                        <li key={campaign.title} className="mr-10 mb-10">
                             <CampaignCard campaign={campaign} index={i} />
                         </li>
                     ))}
