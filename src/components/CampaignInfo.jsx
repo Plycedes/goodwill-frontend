@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { donate, getDonators } from "../utils/api.js";
 import { ethers } from "ethers";
 import { CustomButton, Loader } from "../components";
+import "react-toastify/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function CampaignInfo() {
     const { state } = useLocation();
@@ -33,8 +35,32 @@ function CampaignInfo() {
     const donateToCampaign = async () => {
         setDonateForm(false);
         setIsLoading(true);
-        await donate(amount, state.index);
-        setIsLoading(false);
+        try {
+            await donate(amount, state.index);
+            setIsLoading(false);
+            toast.success("Success", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            setIsLoading(false);
+            toast.error("Something went wrong :(", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     };
 
     return (

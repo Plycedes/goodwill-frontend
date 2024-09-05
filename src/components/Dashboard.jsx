@@ -10,7 +10,7 @@ function Dashboard() {
             const response = await getCampaigns();
             setCampaigns(response);
         })();
-    }, []);
+    }, [campaigns]);
 
     return (
         <div className="m-5">

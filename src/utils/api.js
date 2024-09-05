@@ -81,5 +81,6 @@ export const donate = async (amount, index) => {
         console.log("Complete");
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
