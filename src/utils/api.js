@@ -43,6 +43,7 @@ export const setCampaign = async (owner, title, description, target, image) => {
         console.log("Complete");
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 

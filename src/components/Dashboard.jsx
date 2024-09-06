@@ -17,13 +17,19 @@ function Dashboard() {
             <h1 className="text-3xl font-bold text-orange-600">Campaigns</h1>
             <div className="mt-5 flex justify-center">
                 {window.ethereum ? (
-                    <ul className="grid grid-cols-3">
-                        {campaigns.map((campaign, i) => (
-                            <li key={campaign.title} className="mr-10 mb-10">
-                                <CampaignCard campaign={campaign} index={i} />
-                            </li>
-                        ))}
-                    </ul>
+                    <div>
+                        {campaigns ? (
+                            <ul className="grid grid-cols-3">
+                                {campaigns.map((campaign, i) => (
+                                    <li key={campaign.title} className="mr-10 mb-10">
+                                        <CampaignCard campaign={campaign} index={i} />
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <h1>Connect your wallet</h1>
+                        )}
+                    </div>
                 ) : (
                     <Loader text="Install Metamask to continue" loader={false} />
                 )}

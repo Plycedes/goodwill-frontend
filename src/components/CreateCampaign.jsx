@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { setCampaign } from "../utils/api";
 import { CustomButton, Loader } from "../components";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function CreateCampaign() {
     const [owner, setOwner] = useState("");
@@ -15,9 +17,33 @@ function CreateCampaign() {
 
     const createCampaign = async () => {
         setIsLoading(true);
-        await setCampaign(owner, title, description, target, image);
-        setIsLoading(false);
-        navigate("/");
+        try {
+            await setCampaign(owner, title, description, target, image);
+            toast.success("Success", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setIsLoading(false);
+            navigate("/");
+        } catch (error) {
+            toast.error("Something went wrong :(", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -39,6 +65,7 @@ function CreateCampaign() {
                             placeholder="Address of Fundee"
                             value={owner}
                             onChange={(e) => setOwner(e.target.value)}
+                            required={true}
                         />
                     </div>
                     <div className="mb-4">
@@ -55,6 +82,7 @@ function CreateCampaign() {
                             placeholder="Title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            required={true}
                         />
                     </div>
                     <div className="mb-4">
@@ -71,6 +99,7 @@ function CreateCampaign() {
                             placeholder="Description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            required={true}
                         />
                     </div>
                     <div className="mb-4">
@@ -87,6 +116,7 @@ function CreateCampaign() {
                             placeholder="Target Amount"
                             value={target}
                             onChange={(e) => setTarget(e.target.value)}
+                            required={true}
                         />
                     </div>
                     <div className="mb-4">
@@ -103,6 +133,7 @@ function CreateCampaign() {
                             placeholder="Image url"
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
+                            required={true}
                         />
                     </div>
 
