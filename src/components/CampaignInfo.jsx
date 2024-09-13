@@ -95,7 +95,7 @@ function CampaignInfo() {
                                     }}
                                 />
                                 <button
-                                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none ml-2"
+                                    className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none ml-2"
                                     onClick={openDonateForm}
                                 >
                                     Back
@@ -106,16 +106,20 @@ function CampaignInfo() {
                 </div>
             )}
             {isLoading && <Loader />}
-            <div class="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-3xl m-5">
-                <div class="md:flex">
-                    <div class="md:flex-shrink-0">
-                        <img class="h-full object-cover md:w-48" src={state.image} alt="Image" />
+            <div className="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-3xl m-5">
+                <div className="md:flex">
+                    <div className="md:flex-shrink-0">
+                        <img
+                            className="h-full object-cover md:w-48"
+                            src={state.image}
+                            alt="Image"
+                        />
                     </div>
-                    <div class="p-8">
-                        <div class="uppercase tracking-wide text-xl text-orange-600 font-semibold">
+                    <div className="p-8">
+                        <div className="uppercase tracking-wide text-xl text-orange-600 font-semibold">
                             {state.title}
                         </div>
-                        <div class="block mt-1 text-lg leading-tight font-medium text-black">
+                        <div className="block mt-1 text-lg leading-tight font-medium text-black">
                             {state.description}
                         </div>
 
@@ -127,15 +131,15 @@ function CampaignInfo() {
                             <label>Amount Collected: </label>
                             <label>{ethers.formatEther(state.amountCollected.toString())}</label>
                         </div>
-                        <div class="mt-4">
+                        <div className="mt-4">
                             <button
-                                class="bg-orange-700 text-white px-4 py-2 rounded hover:bg-orange-800 focus:outline-none"
+                                className="bg-orange-700 text-white px-4 py-2 rounded hover:bg-orange-800 focus:outline-none"
                                 onClick={openDonateForm}
                             >
                                 Donate
                             </button>
                             <button
-                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none ml-2"
+                                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none ml-2"
                                 onClick={() => {
                                     navigate(-1);
                                 }}
