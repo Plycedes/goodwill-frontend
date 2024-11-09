@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CustomButton } from "../components";
 import { connect } from "../utils/api";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 function Navbar() {
-    const [address, setAddress] = useState("");
+    const [account, setAccount] = useState(localStorage.getItem("account"));
 
-    const connectMetamask = () => {
-        connect();
-        setAddress("abc");
+    const connectMetamask = async () => {
+        const res = await connect();
+        setAccount(res);
+    };
+
+    useEffect(() => {
+        window.ethereum.on("accountsChanged", accountWasChanged);
+    });
+    useEffect(() => {}, [account]);
+
+    const accountWasChanged = (accounts) => {
+        setAccount(accounts[0]);
+        if (accounts[0] === undefined) {
+            localStorage.setItem("account", "");
+        } else {
+            localStorage.setItem("account", accounts[0]);
+        }
     };
 
     return (
@@ -32,11 +47,7 @@ function Navbar() {
                                         duration-200 ${
                                             isActive ? "text-orange-700" : "text-grey-700"
                                         } border-b 
-                                        border-gray-100 
-                                        hover:bg-gray-50 
-                                        lg:hover:bg-transparent 
-                                        lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                        `
                                     }
                                 >
                                     Dashboard
@@ -51,10 +62,8 @@ function Navbar() {
                                             isActive ? "text-orange-700" : "text-grey-700"
                                         } border-b 
                                         border-gray-100 
-                                        hover:bg-gray-50 
-                                        lg:hover:bg-transparent 
-                                        lg:border-0 hover:text-orange-700 
-                                        lg:p-0`
+                                        hover:bg-orange-100 
+                                        `
                                     }
                                 >
                                     Create Campaign
@@ -62,15 +71,23 @@ function Navbar() {
                             </li>
                         </ul>
                     </div>
-                    <CustomButton
-                        btnType="button"
-                        title={address ? "Create a campaign" : "Connect"}
-                        styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-                        handleClick={() => {
-                            if (address) navigate("create-campaign");
-                            else connectMetamask();
-                        }}
-                    />
+                    {account ? (
+                        <div className="flex items-center">
+                            <Jazzicon diameter={30} seed={jsNumberForAddress(account)} />
+                            <p className="text-xl text-orange-700 ml-3">
+                                {account.substring(0, 12)}
+                            </p>
+                        </div>
+                    ) : (
+                        <CustomButton
+                            btnType="button"
+                            title={"Connect"}
+                            styles={"bg-[#8c6dfd]"}
+                            handleClick={() => {
+                                connectMetamask();
+                            }}
+                        />
+                    )}
                 </div>
             </nav>
         </header>

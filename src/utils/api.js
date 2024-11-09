@@ -4,14 +4,18 @@ import { abi, contractAddress } from "../constants/contract.js";
 let signer, provider;
 
 export const connect = async () => {
-    if (window.ethereum !== null) {
-        await window.ethereum.request({
-            method: "eth_requestAccounts",
-        });
-        return true;
-    } else {
+    if (!window.ethereum) {
         console.log("Metamask not found");
-        return false;
+        return "";
+    } else {
+        try {
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            return accounts[0];
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 
@@ -22,7 +26,16 @@ export const getCampaigns = async () => {
         signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         console.log("Mining");
-        const campaigns = await contract.getCampaigns();
+        const response = await contract.getCampaigns();
+        const campaigns = response.map((campaign, index) => ({
+            owner: campaign.owner,
+            title: campaign.title,
+            description: campaign.description,
+            image: campaign.image,
+            target: campaign.target,
+            amountCollected: campaign.amountCollected,
+            pId: index,
+        }));
         console.log(campaigns[1].title);
         console.log(campaigns.length);
         return campaigns;
