@@ -69,6 +69,22 @@ function Navbar() {
                                     Create Campaign
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink
+                                    to="/profile"
+                                    className={({ isActive }) =>
+                                        `block py-2 pr-4 pl-3 
+                                        duration-200 ${
+                                            isActive ? "text-orange-700" : "text-grey-700"
+                                        } border-b 
+                                        border-gray-100 
+                                        hover:bg-orange-100 
+                                        `
+                                    }
+                                >
+                                    Profile
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                     {account ? (
